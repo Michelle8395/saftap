@@ -41,7 +41,7 @@ importers:
       '@prisma/client':
         specifier: ^5.18.0
         version: 5.22.0(prisma@5.22.0)
-      '@savanna/shared':
+      '@saftap/shared':
         specifier: workspace:*
         version: link:../../packages/shared
       cors:
@@ -81,7 +81,7 @@ importers:
 
   apps/mobile:
     dependencies:
-      '@savanna/shared':
+      '@saftap/shared':
         specifier: workspace:*
         version: link:../../packages/shared
       expo:

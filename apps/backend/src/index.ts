@@ -1,7 +1,7 @@
 import cors from "cors";
 import express from "express";
 import helmet from "helmet";
-import { API_VERSION, createHealthResponse } from "@savanna/shared";
+import { API_VERSION, createHealthResponse } from "@saftap/shared";
 
 const app = express();
 const port = Number(process.env.PORT ?? 3000);

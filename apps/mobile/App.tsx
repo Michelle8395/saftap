@@ -1,13 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import { API_VERSION, createHealthResponse } from "@savanna/shared";
+import { API_VERSION, createHealthResponse } from "@saftap/shared";
 
 const health = createHealthResponse("mobile");
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Savanna</Text>
+      <Text style={styles.title}>Saftap</Text>
       <Text style={styles.subtitle}>API {API_VERSION}</Text>
       <Text style={styles.status}>{health.status}</Text>
       <StatusBar style="auto" />
