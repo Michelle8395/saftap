@@ -20,6 +20,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@coinbase/cdp-sdk": "^1.35.0",
     "@prisma/client": "^5.18.0",
     "@saftap/shared": "workspace:*",
     "bcrypt": "^5.1.1",
@@ -28,6 +29,7 @@
     "express": "^4.19.2",
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.3",
+    "viem": "^2.21.1",
     "zod": "^3.23.8"
   },
   "devDependencies": {
