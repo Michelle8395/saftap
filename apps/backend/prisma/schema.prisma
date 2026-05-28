@@ -43,15 +43,16 @@ model Wallet {
 }
 
 model SavedPayee {
-  id           String   @id @default(uuid()) @db.Uuid
-  userId       String   @db.Uuid
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  label        String
-  mpesaPhone   String?
-  tillNumber   String?
+  id            String        @id @default(uuid()) @db.Uuid
+  userId        String        @db.Uuid
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  label         String
+  mpesaPhone    String?
+  tillNumber    String?
   paybillNumber String?
-  accountRef   String?
-  createdAt    DateTime @default(now())
+  accountRef    String?
+  createdAt     DateTime      @default(now())
+  transactions  Transaction[]
 }
 
 model Transaction {
