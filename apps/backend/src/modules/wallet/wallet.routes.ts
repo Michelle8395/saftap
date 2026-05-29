@@ -1,11 +1,7 @@
-/**
- * Wallet routes placeholder.
- */
-
 import { Router, type Router as ExpressRouter } from "express";
+import { fundWallet, getWalletBalance } from "./wallet.controller.js";
 
 export const walletRouter: ExpressRouter = Router();
 
-walletRouter.get("/", (_request, response) => {
-  response.status(200).json({ message: "Wallet routes placeholder" });
-});
+walletRouter.post("/fund", fundWallet);
+walletRouter.get("/balance", getWalletBalance);
