@@ -7,6 +7,9 @@ import { Router, type Request, type Response, type NextFunction, type Router as 
 import { darajaService } from "./daraja.service.js";
 import type { DarajaCallbackBody } from "./mpesa.types.js";
 
+/**
+ * Webhook router for handling Daraja callback requests.
+*/
 export const mpesaRouter: ExpressRouter = Router();
 
 /**

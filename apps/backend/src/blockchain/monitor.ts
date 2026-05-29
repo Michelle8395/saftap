@@ -153,6 +153,9 @@ async function pollStuckOnChainTransactions(settlementAddress: Address): Promise
   }
 }
 
+/**
+ * Starts the blockchain monitor and returns a function to stop it.
+*/
 export function startMonitor(): () => void {
   if (cleanupWatcher || pollingTimer) {
     return stopMonitor;
@@ -177,6 +180,9 @@ export function startMonitor(): () => void {
   return stopMonitor;
 }
 
+/**
+ * Stops the blockchain monitor if it is running.
+*/
 export function stopMonitor(): void {
   cleanupWatcher?.();
 

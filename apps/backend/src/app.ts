@@ -61,14 +61,21 @@ app.use((_request, response) => {
   response.status(404).json({ success: false, error: "Not Found" });
 });
 
-app.use((error: unknown, _request: express.Request, response: express.Response, _next: express.NextFunction) => {
-  if (error instanceof AppError) {
-    response.status(error.statusCode).json({ success: false, error: error.message });
-    return;
-  }
+app.use(
+  (
+    error: unknown,
+    _request: express.Request,
+    response: express.Response,
+    _next: express.NextFunction,
+  ) => {
+    if (error instanceof AppError) {
+      response.status(error.statusCode).json({ success: false, error: error.message });
+      return;
+    }
 
-  console.error(error);
-  response.status(500).json({ success: false, error: "Internal server error" });
-});
+    console.error(error);
+    response.status(500).json({ success: false, error: "Internal server error" });
+  },
+);
 
 export { app };

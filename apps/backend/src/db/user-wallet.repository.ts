@@ -4,6 +4,9 @@ type UserWithWallet = User & {
   wallet: Wallet;
 };
 
+/**
+ * Input shape for creating a user together with a wallet record in the database.
+*/
 export type CreateUserWithWalletInput = {
   email: string;
   phone: string;

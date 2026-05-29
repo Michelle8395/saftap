@@ -35,8 +35,14 @@ if (!parsedEnv.success) {
   );
 }
 
+/**
+ * Validated environment variables used by the backend.
+*/
 export const env = parsedEnv.data;
 
+/**
+ * Reads a required environment variable and throws if it is missing.
+*/
 export function getRequiredEnv(name: string): string {
   const value = process.env[name];
 
@@ -47,6 +53,9 @@ export function getRequiredEnv(name: string): string {
   return value;
 }
 
+/**
+ * Reads an optional environment variable or returns a fallback value.
+*/
 export function getOptionalEnv(name: string, fallback: string): string {
   return process.env[name] ?? fallback;
 }

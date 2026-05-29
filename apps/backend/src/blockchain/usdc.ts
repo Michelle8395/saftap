@@ -11,11 +11,17 @@ import { getOptionalEnv, getRequiredEnv } from "../config/env.js";
 import { AppError, wrapExternalError } from "../lib/app-error.js";
 import { publicClient, walletClient } from "./client.js";
 
+/**
+ * On-chain USDC contract address used for Sepolia network operations.
+*/
 export const BASE_SEPOLIA_USDC_ADDRESS = getOptionalEnv(
   "BASE_SEPOLIA_USDC_ADDRESS",
   "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
 ) as Address;
 
+/**
+ * Minimal ERC-20 ABI used for USDC balance and transfer contract calls.
+*/
 export const usdcAbi = [
   {
     type: "function",
@@ -98,10 +104,16 @@ export async function getUsdcBalance(address: string): Promise<string> {
   }
 }
 
+/**
+ * Formats a raw USDC value from smallest units into a display string.
+*/
 export function formatUsdc(amount: bigint): string {
   return formatUnits(amount, 6);
 }
 
+/**
+ * Parses a decimal USDC string into smallest-unit integer representation.
+*/
 export function parseUsdc(amount: string): bigint {
   return parseUnits(amount, 6);
 }

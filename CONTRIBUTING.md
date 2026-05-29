@@ -1,26 +1,39 @@
-# Contributing to Safari Tap
+# Contributing to Saftap
 
-This guide sets up the local development environment for Saftap, including the backend PostgreSQL database, Prisma migration, and seed workflow.
+This guide sets up the local development environment for Saftap, including backend dependencies, database setup, Prisma migrations, and running the app.
 
-## 1. Configure Environment
+## 1. Prerequisites
 
-Create `apps/backend/.env` from the example file:
+- Node.js 20 or later
+- pnpm (repo uses `pnpm@9.x`)
+- PostgreSQL locally or via Docker
+- Optional: Docker for quick local database setup
+
+## 2. Fresh‑clone setup
+
+From the repository root:
+
+```bash
+pnpm install
+```
+
+Copy the backend environment example:
 
 ```bash
 cp apps/backend/.env.example apps/backend/.env
 ```
 
-Set `DATABASE_URL` to your local PostgreSQL database:
+Update `apps/backend/.env` with your local values. At minimum, set:
 
 ```env
 DATABASE_URL=postgresql://USER:PASSWORD@localhost:5432/saftap?schema=public
 ```
 
-Do not commit `.env`; it is ignored by git.
+Do not commit `.env`.
 
-## 2. Start PostgreSQL
+## 3. Start PostgreSQL
 
-If you already have PostgreSQL running locally, create a database named `saftap` and use its credentials in `DATABASE_URL`.
+If you already have PostgreSQL running, create a `saftap` database and use its connection string.
 
 For a quick Docker-based setup:
 
@@ -33,7 +46,7 @@ docker run --name saftap-postgres \
   -d postgres:16
 ```
 
-Use this connection string with the Docker setup:
+Then use:
 
 ```env
 DATABASE_URL=postgresql://saftap:saftap@localhost:5432/saftap?schema=public
@@ -45,15 +58,7 @@ If the container already exists but is stopped:
 docker start saftap-postgres
 ```
 
-## 3. Install Dependencies
-
-From the repo root:
-
-```bash
-pnpm install
-```
-
-## 4. Generate Prisma Client
+## 4. Generate Prisma client
 
 From the repo root:
 
@@ -67,7 +72,7 @@ Or from `apps/backend`:
 pnpm prisma generate
 ```
 
-## 5. Run Initial Migration
+## 5. Run migrations
 
 From `apps/backend`:
 
@@ -81,7 +86,7 @@ Or from the repo root:
 pnpm --filter @saftap/backend prisma:migrate
 ```
 
-## 6. Seed the Database
+## 6. Seed the database
 
 From `apps/backend`:
 
@@ -95,24 +100,49 @@ Or from the repo root:
 pnpm --filter @saftap/backend prisma:seed
 ```
 
-The seed script clears existing data and creates one test TOURIST user with a linked Base Sepolia-style wallet.
+## 7. Start local development
 
-## 7. Verify
+Run the full monorepo development stack from the repo root:
 
-Run the backend tests:
+```bash
+pnpm dev
+```
+
+To start only the backend:
+
+```bash
+pnpm --filter @saftap/backend dev
+```
+
+## 8. Verify the backend
+
+Run backend tests:
 
 ```bash
 pnpm --filter @saftap/backend test
 ```
 
-Run the backend typecheck:
+Run backend type checking:
 
 ```bash
 pnpm --filter @saftap/backend typecheck
 ```
 
+## 9. Production / deployment notes
+
+The backend includes `apps/backend/railway.json` and `apps/backend/Procfile` for deployment on Railway or other container-based hosts.
+
+Make sure the production environment defines all required backend variables, including `DATABASE_URL`, `JWT_SECRET`, `DARAJA_CONSUMER_KEY`, `DARAJA_CONSUMER_SECRET`, `DARAJA_SHORTCODE`, and `DARAJA_PASSKEY`.
+
+If deploying manually, build and start the backend with:
+
+```bash
+pnpm --filter @saftap/backend build
+pnpm --filter @saftap/backend start
+```
+
 ## Troubleshooting
 
-If Prisma reports `Environment variable not found: DATABASE_URL`, confirm that `apps/backend/.env` exists and includes `DATABASE_URL`.
-
-If Prisma cannot connect to PostgreSQL, confirm the database is running and that the username, password, host, port, and database name match your `DATABASE_URL`.
+- If Prisma reports `Environment variable not found: DATABASE_URL`, confirm `apps/backend/.env` exists and is loaded.
+- If PostgreSQL connection fails, verify that the database is running and the connection string is correct.
+- Use `pnpm --filter @saftap/backend prisma:generate` after updating Prisma schema or dependencies.

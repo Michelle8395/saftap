@@ -11,6 +11,9 @@ declare global {
   }
 }
 
+/**
+ * Express middleware that validates JWT bearer tokens.
+*/
 export function authenticateJWT(request: Request, response: Response, next: NextFunction): void {
   const authorization = request.header("Authorization");
 

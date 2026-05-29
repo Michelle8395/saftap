@@ -14,20 +14,35 @@ import { getOptionalEnv, getRequiredEnv } from "../../config/env.js";
 import { AppError, wrapExternalError } from "../../lib/app-error.js";
 import { prisma } from "../../lib/prisma.js";
 
+/**
+ * Result data returned when a new wallet is created for a merchant or tourist.
+*/
 export interface CreateWalletResult {
   address: Address;
   cdpWalletId: string;
 }
 
+/**
+ * Formatted USDC balance string returned by wallet balance lookups.
+*/
 export type UsdcBalanceResult = string;
 
+/**
+ * Transaction hash returned when funding a wallet from treasury.
+*/
 export type FundFromTreasuryResult = Hex;
 
+/**
+ * On-chain USDC contract address used for Sepolia network operations.
+*/
 export const BASE_SEPOLIA_USDC_ADDRESS = getOptionalEnv(
   "BASE_SEPOLIA_USDC_ADDRESS",
   "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
 ) as Address;
 
+/**
+ * Minimal ERC-20 ABI used for USDC balance and transfer contract calls.
+*/
 export const usdcAbi = [
   {
     type: "function",
@@ -48,6 +63,9 @@ export const usdcAbi = [
   },
 ] as const;
 
+/**
+ * Public blockchain client for Sepolia read-only operations.
+*/
 export const publicClient = createPublicClient({
   chain: baseSepolia,
   transport: http(getOptionalEnv("BASE_SEPOLIA_RPC_URL", baseSepolia.rpcUrls.default.http[0])),
@@ -59,6 +77,9 @@ function getTreasuryAccount() {
   return privateKeyToAccount(privateKey.startsWith("0x") ? (privateKey as Hex) : `0x${privateKey}`);
 }
 
+/**
+ * Creates a wallet client using the treasury account for sending funds.
+*/
 export function getWalletClient() {
   return createWalletClient({
     account: getTreasuryAccount(),
@@ -192,6 +213,9 @@ export async function fundFromTreasury(
   }
 }
 
+/**
+ * Builds a Coinbase onramp URL for funding the user wallet with USDC.
+*/
 export function getOnrampUrl(walletAddress: string, amountUSD: number): string {
   assertAddress(walletAddress, "walletAddress");
 

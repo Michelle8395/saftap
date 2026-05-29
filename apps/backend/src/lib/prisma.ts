@@ -4,6 +4,9 @@ const globalForPrisma = globalThis as {
   prisma?: PrismaClient;
 };
 
+/**
+ * Singleton Prisma client instance for database access.
+*/
 export const prisma =
   globalForPrisma.prisma ??
   new PrismaClient({

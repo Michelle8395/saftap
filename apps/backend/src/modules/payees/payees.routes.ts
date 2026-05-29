@@ -4,6 +4,9 @@
 
 import { Router, type Router as ExpressRouter } from "express";
 
+/**
+ * Express router for managing payee resources.
+*/
 export const payeesRouter: ExpressRouter = Router();
 
 payeesRouter.get("/", (_request, response) => {

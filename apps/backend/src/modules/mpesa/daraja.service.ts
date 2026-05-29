@@ -255,6 +255,9 @@ async function simulateCallback(transactionId: string): Promise<void> {
   }
 }
 
+/**
+ * Daraja service methods for token acquisition, B2B and B2C payments, and callbacks.
+*/
 export const darajaService = {
   getAccessToken,
   sendToMpesa,

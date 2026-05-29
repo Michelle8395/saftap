@@ -22,14 +22,8 @@ export async function getRate(_request: Request, response: Response): Promise<vo
 
 export async function initiatePayment(request: Request, response: Response): Promise<void> {
   const userId = getUserId(request);
-  const {
-    destinationPhone,
-    destinationTill,
-    paybillNumber,
-    accountRef,
-    amountUsdc,
-    savedPayeeId,
-  } = request.body;
+  const { destinationPhone, destinationTill, paybillNumber, accountRef, amountUsdc, savedPayeeId } =
+    request.body;
 
   const transaction = await paymentService.initiatePayment({
     touristId: userId,

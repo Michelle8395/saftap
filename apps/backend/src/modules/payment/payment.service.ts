@@ -285,6 +285,9 @@ async function getTransactionHistoryImpl(userId: string): Promise<Transaction[]>
   });
 }
 
+/**
+ * Grouped payment service methods for rate lookup, transfer execution, and history retrieval.
+*/
 export const paymentService = {
   getExchangeRate: getExchangeRateImpl,
   executeUsdcTransfer: executeUsdcTransferImpl,
@@ -292,7 +295,19 @@ export const paymentService = {
   getTransactionHistory: getTransactionHistoryImpl,
 };
 
+/**
+ * Gets the current USDC/fiat exchange rate.
+*/
 export const getExchangeRate = paymentService.getExchangeRate;
+/**
+ * Executes a USDC transfer on-chain as part of payment settlement.
+*/
 export const executeUsdcTransfer = paymentService.executeUsdcTransfer;
+/**
+ * Initiates a payment flow and settles funds via USDC transfer.
+*/
 export const initiatePayment = paymentService.initiatePayment;
+/**
+ * Retrieves transaction history for a user.
+*/
 export const getTransactionHistory = paymentService.getTransactionHistory;

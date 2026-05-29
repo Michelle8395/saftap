@@ -107,6 +107,9 @@ export async function login(data: LoginDto): Promise<AuthResponse> {
   return buildAuthResponse(user, user.wallet.baseAddress);
 }
 
+/**
+ * Function performing generateToken operations in the backend.
+*/
 export function generateToken(user: Pick<User, "id">, walletAddress: string): string {
   return jwt.sign(
     {
@@ -118,6 +121,9 @@ export function generateToken(user: Pick<User, "id">, walletAddress: string): st
   );
 }
 
+/**
+ * Function performing verifyToken operations in the backend.
+*/
 export function verifyToken(token: string): AuthTokenPayload {
   try {
     return assertAuthTokenPayload(jwt.verify(token, getJwtSecret()));
