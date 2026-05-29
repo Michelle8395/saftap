@@ -16,7 +16,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFonts, Syne_700Bold, Syne_600SemiBold } from "@expo-google-fonts/syne";
-import { DM_Sans_400Regular, DM_Sans_700Bold } from "@expo-google-fonts/dm-sans";
+import { DMSans_400Regular, DMSans_700Bold } from "@expo-google-fonts/dm-sans";
 import { JetBrainsMono_500Medium } from "@expo-google-fonts/jetbrains-mono";
 import {
   Home,
@@ -57,8 +57,8 @@ export default function App() {
   const [fontsLoaded, fontError] = useFonts({
     Syne_700Bold,
     Syne_600SemiBold,
-    DM_Sans_400Regular,
-    DM_Sans_700Bold,
+    DMSans_400Regular,
+    DMSans_700Bold,
     JetBrainsMono_500Medium,
   });
 
@@ -510,10 +510,10 @@ export default function App() {
           {activeTab === "payment" ? (
              <TouchableOpacity style={styles.sendButtonActive} onPress={() => navigateTo("payment")}>
                <SendIcon size={24} color={theme.colors.onPrimary} />
-               <Text style={[styles.tabLabelActive, { fontFamily: getFont("DM_Sans_700Bold") }]}>Send</Text>
+               <Text style={[styles.tabLabelActive, { fontFamily: getFont("DMSans_700Bold") }]}>Send</Text>
              </TouchableOpacity>
           ) : (
-            <TabButton icon={<Wallet size={24} />} label="Payment" active={activeTab === "payment"} onPress={() => navigateTo("payment")} />
+            <TabButton icon={<Wallet size={24} />} label="Payment" active={false} onPress={() => navigateTo("payment")} />
           )}
 
           <TabButton icon={<CreditCard size={24} />} label="Visa" active={activeTab === "visa"} onPress={() => navigateTo("visa")} />
