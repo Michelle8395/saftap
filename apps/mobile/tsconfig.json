@@ -6,8 +6,8 @@
     "types": ["react", "react-native"],
     "noEmit": true,
     "paths": {
-      "@savanna/shared": ["../../packages/shared/src"],
-      "@savanna/shared/*": ["../../packages/shared/src/*"]
+      "@saftap/shared": ["../../packages/shared/src/index.ts"],
+      "@saftap/shared/*": ["../../packages/shared/src/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"],
