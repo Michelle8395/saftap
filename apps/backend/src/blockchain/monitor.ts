@@ -49,21 +49,18 @@ async function handleIncomingTransfer({ from, amount, txHash }: IncomingUsdcTran
   });
 
   try {
-    const payoutInput = {
-      amountKes: tx.amountKes,
-      transactionId: tx.id,
-      baseTxHash: txHash,
-    };
-
     const payoutResult = tx.destinationPhone
       ? await darajaService.sendToMpesa({
-          ...payoutInput,
           phoneNumber: tx.destinationPhone,
+          amountKes: tx.amountKes.toNumber(),
+          transactionId: tx.id,
+          recipientLabel: "Tourist payout",
         })
       : tx.destinationTill
         ? await darajaService.sendToTill({
-            ...payoutInput,
             tillNumber: tx.destinationTill,
+            amountKes: tx.amountKes.toNumber(),
+            transactionId: tx.id,
           })
         : undefined;
 
@@ -75,7 +72,7 @@ async function handleIncomingTransfer({ from, amount, txHash }: IncomingUsdcTran
       where: { id: tx.id },
       data: {
         status: "COMPLETED",
-        darajaReceiptId: payoutResult.receiptId,
+        darajaReceiptId: payoutResult.ConversationID ?? payoutResult.OriginatorConversationID,
       },
     });
   } catch (error) {
