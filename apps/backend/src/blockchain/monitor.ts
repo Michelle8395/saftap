@@ -2,7 +2,7 @@ import { decodeEventLog, isAddress, type Address, type Hex } from "viem";
 import { getRequiredEnv } from "../config/env.js";
 import { AppError } from "../lib/app-error.js";
 import { prisma } from "../lib/prisma.js";
-import { darajaService } from "../modules/daraja/daraja.service.js";
+import { darajaService } from "../modules/mpesa/daraja.service.js";
 import { publicClient } from "./client.js";
 import { watchIncomingUsdc, type IncomingUsdcTransfer } from "./events.js";
 import { BASE_SEPOLIA_USDC_ADDRESS, usdcAbi } from "./usdc.js";
