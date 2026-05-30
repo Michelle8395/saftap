@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
     "jsx": "react-jsx",
@@ -10,10 +10,10 @@
     "noEmit": true,
     "paths": {
       "@savanna/shared": [
-        "../../packages/shared/src"
+        "../packages/shared/src"
       ],
       "@savanna/shared/*": [
-        "../../packages/shared/src/*"
+        "../packages/shared/src/*"
       ]
     }
   },
